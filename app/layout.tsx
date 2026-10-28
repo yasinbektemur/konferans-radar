@@ -13,8 +13,54 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Biyomedikal AR-GE Konferans Radarı",
-  description: "Biyomedikal konferans çağrılarını takip eden radar arayüzü.",
+  metadataBase: new URL("https://www.biomedical-radar.example"),
+  title: {
+    default: "Biyomedikal AR-GE Konferans Radarı",
+    template: "%s | Biyomedikal AR-GE Konferans Radarı",
+  },
+  description: "Biyomedikal AR-GE konferans, çağrı, hibe ve deadline takibi için güvenilir radar arayüzü.",
+  keywords: [
+    "biyomedikal konferans",
+    "AR-GE çağrıları",
+    "deadline takibi",
+    "tıbbi konferans",
+    "hibe ve çağrılar",
+    "bilimsel etkinlikler",
+  ],
+  applicationName: "Biomedical Conference Radar",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Biyomedikal AR-GE Konferans Radarı",
+    description: "Güvenilir kaynaklardan konferans, deadline ve hibe çağrılarını tek ekranda takip edin.",
+    url: "/",
+    siteName: "Biomedical Conference Radar",
+    locale: "tr_TR",
+    type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Biomedical Conference Radar preview",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Biyomedikal AR-GE Konferans Radarı",
+    description: "Deadline, konferans ve hibe çağrılarını tek ekranda takip eden özel radar.",
+    images: ["/twitter-image"],
+  },
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
+  other: {
+    "theme-color": "#0f172a",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
