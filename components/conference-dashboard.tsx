@@ -171,9 +171,9 @@ function HomeConferenceCard({ conference, isFollowing, onToggleFollow }: { confe
   );
 }
 
-export function ConferenceDashboard({ initialConferences }: { initialConferences: Conference[] }) {
+export function ConferenceDashboard({ initialConferences, showDemoBanner = false }: { initialConferences: Conference[]; showDemoBanner?: boolean }) {
   const [search, setSearch] = useState("");
-  const [showInfoBanner, setShowInfoBanner] = useState(true);
+  const [showInfoBanner, setShowInfoBanner] = useState(showDemoBanner);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileUserMenuOpen, setMobileUserMenuOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState("all");
@@ -562,7 +562,7 @@ export function ConferenceDashboard({ initialConferences }: { initialConferences
               </div>
             ) : (
               <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500 shadow-soft dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300">
-                <p className="text-lg font-semibold text-slate-900 dark:text-white">Sonuç bulunamadı</p>
+                <p className="text-lg font-semibold text-slate-900 dark:text-white">Henüz konferans eklenmedi</p>
                 <p className="mt-2 text-sm">Arama ve filtreleri biraz daha genişletmeyi deneyin.</p>
               </div>
             )}

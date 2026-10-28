@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ConferenceDashboard } from "@/components/conference-dashboard";
-import { getAllConferences } from "@/lib/data";
+import { getAllConferences, getConferencesDataMode } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Ana sayfa",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <ConferenceDashboard initialConferences={getAllConferences()} />;
+  return <ConferenceDashboard initialConferences={getAllConferences()} showDemoBanner={getConferencesDataMode() === "fallback"} />;
 }
