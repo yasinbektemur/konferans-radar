@@ -10,7 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { createClient } from "@/lib/supabase/client";
 import { getTopics, getPublicationPublishers } from "@/lib/data";
-import { formatDate, getDaysUntil, getNearestDeadline } from "@/lib/utils";
+import { formatModeLabel, formatTrustLabel, formatConferenceType } from "@/lib/labels";
+import { formatDate, getDaysUntil, getNearestDeadline, getUpcomingDeadlineEntries } from "@/lib/utils";
 
 const FOLLOWED_KEY = "bmed-followed-conferences";
 
@@ -61,7 +62,7 @@ function DeadlineStrip({ conferences }: { conferences: Conference[] }) {
     <div className="overflow-x-auto pb-1">
       <div className="flex min-w-max gap-3">
         {items.map(({ conference, nearest }) => {
-          const tone = nearest?.tone === "danger" ? "danger" : nearest?.tone === "warning" ? "warning" : "success";
+          const tone = nearest?.tone === "danger" ? "danger" : nearest?.tone === "warning" ? "warning" : nearest?.expired ? "success" : "success";
           const toneClasses = {
             danger: "border-red-200 bg-red-50 text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-200",
             warning: "border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-900/60 dark:bg-amber-950/40 dark:text-amber-200",
@@ -73,12 +74,12 @@ function DeadlineStrip({ conferences }: { conferences: Conference[] }) {
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] opacity-80">Deadline</p>
                 <p className="mt-1 text-sm font-semibold">{conference.name}</p>
-                <p className="text-xs opacity-80">{nearest?.label} • {formatDate(nearest?.value)}</p>
+                <p className="text-xs opacity-80">{nearest ? (nearest.expired ? "Süresi doldu" : `${nearest.label} • ${formatDate(nearest.value)}`) : "Deadline yok"}</p>
               </div>
               <div className="text-right">
-                <p className="text-xs opacity-80">Kalan</p>
-                <p className="text-xl font-bold">{nearest?.daysLeft}</p>
-                <p className="text-[10px] uppercase tracking-[0.22em] opacity-80">gün</p>
+                <p className="text-xs opacity-80">{nearest?.expired ? "Durum" : "Kalan"}</p>
+                <p className="text-xl font-bold">{nearest ? (nearest.expired ? 0 : nearest.daysLeft) : "—"}</p>
+                <p className="text-[10px] uppercase tracking-[0.22em] opacity-80">{nearest?.expired ? "gün" : "gün"}</p>
               </div>
             </div>
           );
@@ -102,16 +103,16 @@ function HomeConferenceCard({ conference, isFollowing, onToggleFollow }: { confe
       <div className="border-b border-slate-200 bg-slate-50/80 p-4 dark:border-slate-800 dark:bg-slate-950/40">
         <div className="mb-3 flex items-start justify-between gap-3">
           <div>
-            <div className="mb-2 flex items-center gap-2">
-              <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-700 dark:text-brand-300">{conference.type}</span>
-              <Badge tone={conference.trustLevel === "verified" ? "success" : conference.trustLevel === "suspicious" ? "danger" : "warning"}>{conference.trustLevel}</Badge>
+            <div className="mb-2 flex flex-wrap items-center gap-2">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-700 dark:text-brand-300">{formatConferenceType(conference.type)}</span>
+              <Badge tone={conference.trustLevel === "verified" ? "success" : conference.trustLevel === "suspicious" ? "danger" : "warning"}>{formatTrustLabel(conference.trustLevel)}</Badge>
             </div>
             <Link href={`/conference/${conference.id}`} className="block text-lg font-semibold text-slate-900 transition hover:text-brand-700 dark:text-white dark:hover:text-brand-300">
               {conference.name}
             </Link>
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{conference.acronym}</p>
           </div>
-          <Badge tone={conference.mode === "online" ? "success" : conference.mode === "hybrid" ? "warning" : "default"}>{conference.mode}</Badge>
+          <Badge tone={conference.mode === "online" ? "success" : conference.mode === "hybrid" ? "warning" : "default"}>{formatModeLabel(conference.mode)}</Badge>
         </div>
 
         <div className="flex flex-wrap items-center gap-2 text-xs text-slate-600 dark:text-slate-300">
@@ -141,18 +142,18 @@ function HomeConferenceCard({ conference, isFollowing, onToggleFollow }: { confe
           ))}
         </div>
 
-        <div className={`rounded-2xl border p-3 ring-1 ${deadlineClasses}`}>
+        <div className={`rounded-2xl border p-3 ring-1 ${nearest?.expired ? "border-slate-200 bg-slate-100 text-slate-500 ring-slate-200 dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-400 dark:ring-slate-700" : deadlineClasses}`}>
           <div className="mb-1 flex items-center justify-between gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] opacity-80">
             <span>En yakın deadline</span>
-            <span>{nearest ? `${nearest.daysLeft} gün` : "Yok"}</span>
+            <span>{nearest ? (nearest.expired ? "Süresi doldu" : `${nearest.daysLeft} gün`) : "Yok"}</span>
           </div>
           <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="text-sm font-semibold">{nearest?.label ?? "Deadline bilgisi yok"}</p>
+              <p className="text-sm font-semibold">{nearest ? (nearest.expired ? "Süresi doldu" : nearest.label) : "Deadline bilgisi yok"}</p>
               <p className="text-xs opacity-75">{nearest ? formatDate(nearest.value) : "—"}</p>
             </div>
-            <span className="rounded-xl bg-white/80 px-2 py-1 text-xs font-bold text-slate-800 dark:bg-slate-900/80 dark:text-slate-100">
-              {nearest ? nearest.daysLeft : "—"}
+            <span className="rounded-full bg-white/80 px-2.5 py-1 text-xs font-bold text-slate-800 dark:bg-slate-900/80 dark:text-slate-100">
+              {nearest ? (nearest.expired ? "0" : nearest.daysLeft) : "—"}
             </span>
           </div>
         </div>
@@ -172,6 +173,9 @@ function HomeConferenceCard({ conference, isFollowing, onToggleFollow }: { confe
 
 export function ConferenceDashboard({ initialConferences }: { initialConferences: Conference[] }) {
   const [search, setSearch] = useState("");
+  const [showInfoBanner, setShowInfoBanner] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileUserMenuOpen, setMobileUserMenuOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState("all");
   const [countryFilter, setCountryFilter] = useState("all");
   const [publicationFilter, setPublicationFilter] = useState("all");
@@ -259,7 +263,7 @@ export function ConferenceDashboard({ initialConferences }: { initialConferences
       const matchesPublication = publicationFilter === "all" || conference.publication.publisher === publicationFilter;
       const matchesIndexed = !indexedOnly || conference.publication.indexing.length > 0;
       const nearest = getNearestDeadline(conference);
-      const matchesNearDeadline = !nearDeadlineOnly || (nearest ? nearest.daysLeft <= 30 : false);
+      const matchesNearDeadline = !nearDeadlineOnly || (nearest ? nearest.daysLeft <= 30 && nearest.daysLeft >= 0 : false);
       const matchesType =
         typeTab === "all" ||
         (typeTab === "calls" ? ["conference", "workshop"].includes(conference.type) : conference.type === typeTab);
@@ -291,6 +295,14 @@ export function ConferenceDashboard({ initialConferences }: { initialConferences
       const bDeadline = getNearestDeadline(b);
       const aDays = aDeadline ? aDeadline.daysLeft : Number.MAX_SAFE_INTEGER;
       const bDays = bDeadline ? bDeadline.daysLeft : Number.MAX_SAFE_INTEGER;
+
+      if (aDeadline?.expired && !bDeadline?.expired) {
+        return 1;
+      }
+      if (!aDeadline?.expired && bDeadline?.expired) {
+        return -1;
+      }
+
       return aDays - bDays;
     });
   }, [countryFilter, endDate, indexedOnly, initialConferences, nearDeadlineOnly, publicationFilter, search, selectedTopic, sortBy, startDate, typeTab]);
@@ -378,6 +390,15 @@ export function ConferenceDashboard({ initialConferences }: { initialConferences
   return (
     <main className="min-h-screen bg-transparent text-slate-900 dark:text-slate-100">
       <div className="mx-auto max-w-7xl px-4 py-6 md:px-6 lg:px-8">
+        {showInfoBanner && (
+          <div className="mb-4 flex items-start justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-900/60 dark:bg-amber-950/40 dark:text-amber-200">
+            <p>Bu veriler örnektir, resmi sitelerden doğrulanmadan kullanmayın.</p>
+            <button type="button" aria-label="Bilgi şeridini kapat" onClick={() => setShowInfoBanner(false)} className="rounded-full px-2 py-1 text-xs font-semibold transition hover:bg-amber-100 dark:hover:bg-amber-900/50">
+              Kapat
+            </button>
+          </div>
+        )}
+
         <header className="mb-6 rounded-3xl border border-slate-200/80 bg-white/80 px-4 py-3 shadow-soft backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/80">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-3">
@@ -388,14 +409,32 @@ export function ConferenceDashboard({ initialConferences }: { initialConferences
               </div>
             </div>
 
-            <nav className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-2 lg:hidden">
+              <button type="button" aria-label="Ana menüyü aç" aria-expanded={mobileMenuOpen} onClick={() => setMobileMenuOpen((value) => !value)} className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-lg text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
+                ☰
+              </button>
+            </div>
+
+            <nav className={`${mobileMenuOpen ? "flex" : "hidden"} w-full flex-col gap-2 lg:flex lg:w-auto lg:flex-row lg:items-center lg:gap-2`}>
               <Link href="/takvim" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800">Takvim</Link>
               <Link href="/harita" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800">Harita</Link>
               <Link href="/opportunities" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800">Fırsatlar</Link>
               <Link href="/hakkinda" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800">Hakkında</Link>
               <Link href="/panel" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800">Ekip panosu</Link>
-              <Link href="/settings" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800">Bildirimler</Link>
-              <Link href="/followed" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800">Takip ettiklerim ({followedIds.length})</Link>
+
+              <div className="relative">
+                <button type="button" aria-label="Kullanıcı kısayolları menüsü" aria-expanded={mobileUserMenuOpen} onClick={() => setMobileUserMenuOpen((value) => !value)} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
+                  Kullanıcı ▾
+                </button>
+
+                {mobileUserMenuOpen && (
+                  <div className="absolute right-0 z-20 mt-2 min-w-[220px] rounded-2xl border border-slate-200 bg-white p-2 shadow-soft dark:border-slate-700 dark:bg-slate-900">
+                    <Link href="/settings" className="block rounded-xl px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800">Bildirimler</Link>
+                    <Link href="/followed" className="block rounded-xl px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800">Takip ettiklerim ({followedIds.length})</Link>
+                  </div>
+                )}
+              </div>
+
               <ThemeToggle />
             </nav>
           </div>
@@ -438,7 +477,7 @@ export function ConferenceDashboard({ initialConferences }: { initialConferences
         <section className="mb-6 rounded-3xl border border-slate-200/80 bg-white/80 p-4 shadow-soft backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/80">
           <div className="mb-3 flex items-center justify-between gap-4">
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Yaklaşan deadline’lar</p>
-            <span className="text-xs text-slate-500 dark:text-slate-400">Son 30 gün</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400">Önümüzdeki 30 gün</span>
           </div>
           <DeadlineStrip conferences={initialConferences} />
         </section>

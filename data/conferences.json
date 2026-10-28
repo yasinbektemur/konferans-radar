@@ -4,8 +4,8 @@
     "name": "Medical Image Computing and Computer Assisted Intervention",
     "acronym": "MICCAI 2026",
     "description": "Tıbbi görüntüleme, bilgisayar destekli müdahale ve klinik yapay zekâ çalıştayları.",
-    "startDate": "2026-09-20",
-    "endDate": "2026-09-24",
+    "startDate": "2027-09-20",
+    "endDate": "2027-09-24",
     "city": "München",
     "country": "Almanya",
     "mode": "onsite",
@@ -15,11 +15,11 @@
       "tıbbi cihaz"
     ],
     "deadlines": {
-      "abstract": "2026-03-15",
-      "fullPaper": "2026-04-18",
-      "notification": "2026-05-30",
-      "registration": "2026-07-10",
-      "cameraReady": "2026-08-05"
+      "abstract": "2027-03-15",
+      "fullPaper": "2027-04-18",
+      "notification": "2027-05-30",
+      "registration": "2027-07-10",
+      "cameraReady": "2027-08-05"
     },
     "publication": {
       "publisher": "Springer",
@@ -47,8 +47,8 @@
     "name": "Annual International Conference of the IEEE Engineering in Medicine and Biology Society",
     "acronym": "EMBC 2026",
     "description": "Biyomedikal mühendisliği, sensörler, klinik sistemler ve sağlık teknolojileri için uluslararası buluşma.",
-    "startDate": "2026-07-14",
-    "endDate": "2026-07-18",
+    "startDate": "2027-07-14",
+    "endDate": "2027-07-18",
     "city": "Kopenhag",
     "country": "Danimarka",
     "mode": "hybrid",
@@ -58,11 +58,11 @@
       "biyomedikal mühendisliği"
     ],
     "deadlines": {
-      "abstract": "2026-02-25",
-      "fullPaper": "2026-03-30",
-      "notification": "2026-05-02",
-      "registration": "2026-06-15",
-      "cameraReady": "2026-06-30"
+      "abstract": "2027-02-25",
+      "fullPaper": "2027-03-30",
+      "notification": "2027-05-02",
+      "registration": "2027-06-15",
+      "cameraReady": "2027-06-30"
     },
     "publication": {
       "publisher": "IEEE",
@@ -90,8 +90,8 @@
     "name": "International Conference on Sensors and Biomedical Applications",
     "acronym": "SENSORS 2026",
     "description": "Sensör teknolojileri, biyomedikal ölçüm ve implant izleme alanlarına odaklanan tartışmalar.",
-    "startDate": "2026-11-09",
-    "endDate": "2026-11-12",
+    "startDate": "2027-11-09",
+    "endDate": "2027-11-12",
     "city": "İzmir",
     "country": "Türkiye",
     "mode": "onsite",
@@ -101,11 +101,11 @@
       "tıbbi cihaz"
     ],
     "deadlines": {
-      "abstract": "2026-05-10",
-      "fullPaper": "2026-06-12",
-      "notification": "2026-07-25",
-      "registration": "2026-09-01",
-      "cameraReady": "2026-09-30"
+      "abstract": "2027-05-10",
+      "fullPaper": "2027-06-12",
+      "notification": "2027-07-25",
+      "registration": "2027-09-01",
+      "cameraReady": "2027-09-30"
     },
     "publication": {
       "publisher": "Diğer",
@@ -132,8 +132,8 @@
     "name": "IEEE International Conference on Biomedical and Health Informatics",
     "acronym": "BHI 2026",
     "description": "Sağlık bilişimi, veri analitiği ve klinik karar destek sistemleri üzerine çağrı.",
-    "startDate": "2026-10-06",
-    "endDate": "2026-10-09",
+    "startDate": "2027-10-06",
+    "endDate": "2027-10-09",
     "city": "Boston",
     "country": "ABD",
     "mode": "onsite",
@@ -143,11 +143,11 @@
       "veri analitiği"
     ],
     "deadlines": {
-      "abstract": "2026-04-02",
-      "fullPaper": "2026-05-05",
-      "notification": "2026-06-10",
-      "registration": "2026-08-01",
-      "cameraReady": "2026-08-25"
+      "abstract": "2027-04-02",
+      "fullPaper": "2027-05-05",
+      "notification": "2027-06-10",
+      "registration": "2027-08-01",
+      "cameraReady": "2027-08-25"
     },
     "publication": {
       "publisher": "IEEE",
@@ -176,8 +176,8 @@
     "name": "Digital Health and AI for Clinical Care",
     "acronym": "DIGIHEALTH 2026",
     "description": "Dijital sağlık, klinik karar desteği ve AI tabanlı hasta izleme çalışmaları.",
-    "startDate": "2026-06-18",
-    "endDate": "2026-06-20",
+    "startDate": "2027-06-18",
+    "endDate": "2027-06-20",
     "city": "Londra",
     "country": "Birleşik Krallık",
     "mode": "online",
@@ -187,9 +187,9 @@
       "klinik karar sistemi"
     ],
     "deadlines": {
-      "abstract": "2026-02-14",
-      "notification": "2026-03-22",
-      "registration": "2026-04-15"
+      "abstract": "2027-02-14",
+      "notification": "2027-03-22",
+      "registration": "2027-04-15"
     },
     "publication": {
       "publisher": "Elsevier",
@@ -216,8 +216,8 @@
     "name": "MedTech Innovation Challenge",
     "acronym": "MedTech 2026",
     "description": "Tıbbi cihaz tasarımı, prototip geliştirme ve klinik karşılaştırma yarışması.",
-    "startDate": "2026-08-27",
-    "endDate": "2026-08-29",
+    "startDate": "2027-08-27",
+    "endDate": "2027-08-29",
     "city": "Ankara",
     "country": "Türkiye",
     "mode": "hybrid",
@@ -227,9 +227,9 @@
       "klinik değerlendirme"
     ],
     "deadlines": {
-      "abstract": "2026-04-28",
-      "notification": "2026-05-20",
-      "registration": "2026-06-10"
+      "abstract": "2027-04-28",
+      "notification": "2027-05-20",
+      "registration": "2027-06-10"
     },
     "publication": {
       "publisher": "Yok",
@@ -254,8 +254,8 @@
     "name": "Biosignals and Wearable Technologies Summit",
     "acronym": "BIOSIGNALS 2026",
     "description": "Biyosinyal işleme, giyilebilir cihazlar ve uzun süreli izleme için bir fikir platformu.",
-    "startDate": "2026-09-01",
-    "endDate": "2026-09-03",
+    "startDate": "2027-09-01",
+    "endDate": "2027-09-03",
     "city": "Seul",
     "country": "Güney Kore",
     "mode": "onsite",
@@ -265,10 +265,10 @@
       "yaşam analitiği"
     ],
     "deadlines": {
-      "abstract": "2026-03-05",
-      "fullPaper": "2026-04-10",
-      "notification": "2026-05-16",
-      "registration": "2026-06-28"
+      "abstract": "2027-03-05",
+      "fullPaper": "2027-04-10",
+      "notification": "2027-05-16",
+      "registration": "2027-06-28"
     },
     "publication": {
       "publisher": "Elsevier",
@@ -296,8 +296,8 @@
     "name": "Clinical AI and Diagnostics Forum",
     "acronym": "CLIN-AI 2026",
     "description": "Klinik karar destek, tanı sistemleri ve güvenilir yapay zeka uygulamaları için fikir paylaşımı.",
-    "startDate": "2026-12-02",
-    "endDate": "2026-12-05",
+    "startDate": "2027-12-02",
+    "endDate": "2027-12-05",
     "city": "İstanbul",
     "country": "Türkiye",
     "mode": "hybrid",
@@ -307,10 +307,10 @@
       "sağlık yazılımı"
     ],
     "deadlines": {
-      "abstract": "2026-06-20",
-      "fullPaper": "2026-07-18",
-      "notification": "2026-08-30",
-      "registration": "2026-10-05"
+      "abstract": "2027-06-20",
+      "fullPaper": "2027-07-18",
+      "notification": "2027-08-30",
+      "registration": "2027-10-05"
     },
     "publication": {
       "publisher": "IEEE",
@@ -337,8 +337,8 @@
     "name": "International Conference on Biomedical Robotics and Assistive Systems",
     "acronym": "BIOMEDROB 2026",
     "description": "Biyomedikal robotlar, rehabilitasyon ve yardımcı sistemler için akademik ve endüstriyel buluşma.",
-    "startDate": "2026-05-25",
-    "endDate": "2026-05-28",
+    "startDate": "2027-05-25",
+    "endDate": "2027-05-28",
     "city": "Tokyo",
     "country": "Japonya",
     "mode": "onsite",
@@ -348,11 +348,11 @@
       "tıbbi cihaz"
     ],
     "deadlines": {
-      "abstract": "2026-01-30",
-      "fullPaper": "2026-02-25",
-      "notification": "2026-03-28",
-      "registration": "2026-04-20",
-      "cameraReady": "2026-05-01"
+      "abstract": "2027-01-30",
+      "fullPaper": "2027-02-25",
+      "notification": "2027-03-28",
+      "registration": "2027-04-20",
+      "cameraReady": "2027-05-01"
     },
     "publication": {
       "publisher": "Springer",
@@ -380,8 +380,8 @@
     "name": "Health AI and Medical Innovation Fair",
     "acronym": "HEALTHAI FAIR",
     "description": "Sağlık teknolojileri, medikal AI ve endüstri iş birlikleri için fuar ve demo alanı.",
-    "startDate": "2026-07-29",
-    "endDate": "2026-07-31",
+    "startDate": "2027-07-29",
+    "endDate": "2027-07-31",
     "city": "Berlin",
     "country": "Almanya",
     "mode": "onsite",
@@ -391,9 +391,9 @@
       "yapay zekâ"
     ],
     "deadlines": {
-      "abstract": "2026-03-12",
-      "notification": "2026-04-17",
-      "registration": "2026-05-25"
+      "abstract": "2027-03-12",
+      "notification": "2027-04-17",
+      "registration": "2027-05-25"
     },
     "publication": {
       "publisher": "Diğer",
@@ -418,8 +418,8 @@
     "name": "Genomics and Precision Health Congress",
     "acronym": "GENHEALTH 2026",
     "description": "Genomik veriler, kişiselleştirilmiş tedavi ve biyoinformatik alanları kapsamlı bir platformda buluşuyor.",
-    "startDate": "2026-06-09",
-    "endDate": "2026-06-12",
+    "startDate": "2027-06-09",
+    "endDate": "2027-06-12",
     "city": "Madrid",
     "country": "İspanya",
     "mode": "hybrid",
@@ -429,11 +429,11 @@
       "kişiselleştirilmiş tıp"
     ],
     "deadlines": {
-      "abstract": "2026-02-09",
-      "fullPaper": "2026-03-18",
-      "notification": "2026-04-26",
-      "registration": "2026-05-18",
-      "cameraReady": "2026-06-01"
+      "abstract": "2027-02-09",
+      "fullPaper": "2027-03-18",
+      "notification": "2027-04-26",
+      "registration": "2027-05-18",
+      "cameraReady": "2027-06-01"
     },
     "publication": {
       "publisher": "Elsevier",
@@ -461,8 +461,8 @@
     "name": "Biostatistics and Clinical Data Science Symposium",
     "acronym": "BIOSTAT 2026",
     "description": "Biyoistatistik, klinik veri analitiği ve güvenilir karar destek modelleri için uzman sempozyumu.",
-    "startDate": "2026-11-18",
-    "endDate": "2026-11-20",
+    "startDate": "2027-11-18",
+    "endDate": "2027-11-20",
     "city": "İzmir",
     "country": "Türkiye",
     "mode": "online",
@@ -472,9 +472,9 @@
       "biyomedikal görüntüleme"
     ],
     "deadlines": {
-      "abstract": "2026-05-28",
-      "notification": "2026-06-25",
-      "registration": "2026-07-20"
+      "abstract": "2027-05-28",
+      "notification": "2027-06-25",
+      "registration": "2027-07-20"
     },
     "publication": {
       "publisher": "Diğer",

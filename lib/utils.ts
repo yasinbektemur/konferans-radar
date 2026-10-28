@@ -1,4 +1,5 @@
 import type { Conference, DeadlineKey } from "@/types/conference";
+import { DEADLINE_LABELS } from "@/lib/labels";
 
 export function formatDate(date: string | null | undefined): string {
   if (!date) {
@@ -17,14 +18,19 @@ export function formatDate(date: string | null | undefined): string {
   }).format(parsed);
 }
 
+export function getTodayStart(): Date {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return today;
+}
+
 export function getDaysUntil(date: string | null | undefined): number {
   if (!date) {
     return Number.POSITIVE_INFINITY;
   }
 
   const target = new Date(date);
-  const today = typeof window !== "undefined" ? new Date() : new Date("2026-01-01T00:00:00.000Z");
-  today.setHours(0, 0, 0, 0);
+  const today = getTodayStart();
   target.setHours(0, 0, 0, 0);
 
   const diff = target.getTime() - today.getTime();
@@ -34,42 +40,50 @@ export function getDaysUntil(date: string | null | undefined): number {
 export function getDeadlineEntries(conference: Conference) {
   const entries: Array<{ key: DeadlineKey; label: string; value: string }> = [];
 
-  const labels: Record<DeadlineKey, string> = {
-    abstract: "Abstract",
-    fullPaper: "Full Paper",
-    notification: "Notification",
-    registration: "Registration",
-    cameraReady: "Camera Ready",
-  };
-
-  (Object.keys(labels) as DeadlineKey[]).forEach((key) => {
+  (Object.keys(DEADLINE_LABELS) as DeadlineKey[]).forEach((key) => {
     const value = conference.deadlines[key];
     if (value) {
-      entries.push({ key, label: labels[key], value });
+      entries.push({ key, label: DEADLINE_LABELS[key], value });
     }
   });
 
   return entries.sort((a, b) => new Date(a.value).getTime() - new Date(b.value).getTime());
 }
 
+export function getUpcomingDeadlineEntries(conference: Conference) {
+  return getDeadlineEntries(conference).filter((entry) => getDaysUntil(entry.value) >= 0);
+}
+
 export function getNearestDeadline(conference: Conference) {
-  const entries = getDeadlineEntries(conference);
+  const entries = getUpcomingDeadlineEntries(conference);
   if (!entries.length) {
-    return null;
+    const expiredEntries = getDeadlineEntries(conference);
+    const lastExpired = expiredEntries[expiredEntries.length - 1];
+    if (!lastExpired) {
+      return null;
+    }
+
+    return {
+      ...lastExpired,
+      label: lastExpired.label,
+      daysLeft: 0,
+      tone: "expired" as const,
+      expired: true,
+    };
   }
 
   const nearest = entries[0];
   const daysLeft = getDaysUntil(nearest.value);
 
   if (daysLeft <= 14) {
-    return { ...nearest, daysLeft, tone: "danger" as const };
+    return { ...nearest, daysLeft, tone: "danger" as const, expired: false };
   }
 
   if (daysLeft <= 30) {
-    return { ...nearest, daysLeft, tone: "warning" as const };
+    return { ...nearest, daysLeft, tone: "warning" as const, expired: false };
   }
 
-  return { ...nearest, daysLeft, tone: "neutral" as const };
+  return { ...nearest, daysLeft, tone: "neutral" as const, expired: false };
 }
 
 export function getModeStyles(mode: Conference["mode"]): string {
